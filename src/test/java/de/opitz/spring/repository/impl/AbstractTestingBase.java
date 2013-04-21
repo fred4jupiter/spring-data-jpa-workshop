@@ -9,13 +9,19 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 import de.opitzconsulting.spring.repository.CustomerRepository;
 
+/**
+ * Base class for integration tests with Spring.
+ * 
+ * @author michael
+ * 
+ */
 @ContextConfiguration(locations = { "classpath:META-INF/spring/app-config.xml" })
 public abstract class AbstractTestingBase extends AbstractTransactionalJUnit4SpringContextTests {
 
-    @Autowired
-    protected CustomerRepository customerRepository;
+	@Autowired
+	protected CustomerRepository customerRepository;
 
-    @PersistenceContext
-    protected EntityManager entityManager;
+	@PersistenceContext
+	protected EntityManager entityManager;
 
 }

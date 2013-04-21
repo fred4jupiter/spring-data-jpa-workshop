@@ -17,7 +17,7 @@ public class QueryDslJpaTest extends AbstractTestingBase {
     public void findCustomerWithBirthdayOn_JPA() {
         final String name = "Michael";
         final LocalDate birthday = new LocalDate(1976, 2, 25);
-        Customer customer = createCustomerWithNameAndBirthday(name, birthday);
+        Customer customer = createAndSaveCustomerWith(name, birthday);
 
         JPQLQuery query = new JPAQuery(entityManager);
         QCustomer qCustomer = QCustomer.customer;
@@ -31,7 +31,7 @@ public class QueryDslJpaTest extends AbstractTestingBase {
     public void findCustomerWithBirthdayOn_SpringDataJpa() {
         final String name = "Michael";
         final LocalDate birthday = new LocalDate(1976, 2, 25);
-        Customer customer = createCustomerWithNameAndBirthday(name, birthday);
+        Customer customer = createAndSaveCustomerWith(name, birthday);
 
         QCustomer qCustomer = QCustomer.customer;
 
@@ -39,7 +39,7 @@ public class QueryDslJpaTest extends AbstractTestingBase {
         assertEquals(customer, michael);
     }
 
-    private Customer createCustomerWithNameAndBirthday(final String name, final LocalDate birthday) {
+    private Customer createAndSaveCustomerWith(final String name, final LocalDate birthday) {
         Customer customer = new Customer();
         customer.setName(name);
         customer.setBirthday(birthday);
