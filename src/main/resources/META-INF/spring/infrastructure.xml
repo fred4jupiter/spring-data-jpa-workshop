@@ -23,7 +23,7 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
 				<property name="generateDdl" value="true" />
-				<property name="database" value="HSQL" />
+				<property name="database" value="H2" />
 			</bean>
 		</property>
 		<property name="jpaProperties">
@@ -33,5 +33,5 @@
 		</property>
 	</bean>
 
-	<jdbc:embedded-database id="dataSource" type="HSQL" />
+	<jdbc:embedded-database id="dataSource" type="H2" />
 </beans>
