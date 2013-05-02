@@ -23,25 +23,42 @@ public class Customer {
 	@GeneratedValue
 	private Long id;
 
+	@Column(name = "CREATED_AT")
 	private LocalDate createdAt;
 
+	@Column(name = "SALES_AMOUNT")
 	private Double salesAmount;
 
+	@Column(name = "BIRTHDAY")
 	private LocalDate birthday;
 
+	@Column(name = "FIRST_NAME")
 	private String firstname;
 
+	@Column(name = "LAST_NAME")
 	private String lastname;
-	
-	@Column(unique = true)
+
+	@Column(name = "EMAIL", unique = true)
 	private EmailAddress emailAddress;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "CUSTOMER_ID")
 	private Set<Address> addresses = new HashSet<Address>();
-	
+
 	protected Customer() {
 		// for hibernate
+	}
+
+	public Customer(LocalDate birthday, String firstname, String lastname) {
+		Assert.hasText(firstname);
+		Assert.hasText(lastname);
+		Assert.notNull(birthday);
+		Assert.notNull(salesAmount);
+		this.salesAmount = new Double(0);
+		this.birthday = birthday;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.createdAt = new LocalDate();
 	}
 
 	public Customer(Double salesAmount, LocalDate birthday, String firstname, String lastname) {

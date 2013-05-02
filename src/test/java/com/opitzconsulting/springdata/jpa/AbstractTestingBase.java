@@ -2,9 +2,13 @@ package com.opitzconsulting.springdata.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Base class for integration tests with Spring.
@@ -12,10 +16,15 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * @author michael
  * 
  */
-@ContextConfiguration(locations = { "classpath:META-INF/spring/app-config.xml" })
-public abstract class AbstractTestingBase extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = { "classpath:/test-app-config.xml", "classpath:META-INF/spring/app-config.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
+public abstract class AbstractTestingBase {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+
+	@Autowired
+	private DataSource dataSource;
 
 }
