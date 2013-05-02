@@ -1,4 +1,4 @@
-package de.opitzconsulting.spring.specs;
+package com.opitzconsulting.springdata.jpa.specs;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -8,8 +8,8 @@ import javax.persistence.criteria.Root;
 import org.joda.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 
-import de.opitzconsulting.spring.domain.Customer;
-import de.opitzconsulting.spring.domain.Customer_;
+import com.opitzconsulting.springdata.jpa.domain.Customer;
+import com.opitzconsulting.springdata.jpa.domain.Customer_;
 
 public class CustomerSpecs {
 

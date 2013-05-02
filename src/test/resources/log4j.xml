@@ -22,7 +22,11 @@
 		<level value="WARN" />
 	</logger>
 	
-	<logger name="de.opitzconsulting.spring">
+	<logger name="org.hibernate.tool.hbm2ddl.SchemaExport">
+		<level value="FATAL" />
+	</logger>
+	
+	<logger name="de.opitzconsulting">
 		<level value="DEBUG" />
 	</logger>
 
