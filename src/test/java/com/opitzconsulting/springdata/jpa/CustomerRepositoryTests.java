@@ -23,6 +23,8 @@ import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.Customer_;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
 
+import java.util.List;
+
 public class CustomerRepositoryTests extends AbstractTestingBase {
 
 	@Autowired
@@ -57,9 +59,10 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
 		Predicate isLongTermCustomer = builder.lessThan(root.get(Customer_.createdAt), today.minusYears(2));
 		query.where(builder.and(hasBirthday, isLongTermCustomer));
 
-		Customer foundCustomer = entityManager.createQuery(query.select(root)).getSingleResult();
+        List<Customer> customers = entityManager.createQuery(query.select(root)).getResultList();
 
-		assertEquals(customer, foundCustomer);
+        assertThat(customers.size(), equalTo(1));
+        assertThat(customers.get(0), equalTo(customer));
 	}
 
 	@Test
