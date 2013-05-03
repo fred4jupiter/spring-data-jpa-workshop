@@ -20,7 +20,7 @@ public class ApplicationConfigTest {
     }
 
     @Test
-    public void bootstrapAppWithTestingConfig() {
+    public void bootstrapAppFromTestingConfig() {
         ApplicationContext context = new AnnotationConfigApplicationContext(TestingConfig.class);
         assertThat(context, is(notNullValue()));
         assertThat(context.getBean(CustomerFactory.class), is(notNullValue()));
@@ -31,5 +31,12 @@ public class ApplicationConfigTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/app-config.xml");
         assertThat(context, is(notNullValue()));
         assertThat(context.getBean(CustomerRepository.class), is(notNullValue()));
+    }
+
+    @Test
+    public void bootstrapAppFromXml_Testing() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("test-app-config.xml");
+        assertThat(context, is(notNullValue()));
+        assertThat(context.getBean(CustomerFactory.class), is(notNullValue()));
     }
 }
