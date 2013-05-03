@@ -11,5 +11,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
 		QueryDslPredicateExecutor<Customer> {
 
 	Customer findByBirthdayAndSalesAmountGreaterThan(LocalDate birthday, Double salesAmount);
-
 }

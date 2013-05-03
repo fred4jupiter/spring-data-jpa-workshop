@@ -1,16 +1,12 @@
 package com.opitzconsulting.springdata.jpa.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "ADDRESS")
+@NamedQuery(name="address.findAddressByCountry", query="Select a from Address a where a.country = ?1")
 public class Address {
 
 	@Id
