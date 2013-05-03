@@ -12,19 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Base class for integration tests with Spring.
- * 
+ *
  * @author michael
- * 
  */
-@ContextConfiguration(locations = { "classpath:/test-app-config.xml", "classpath:META-INF/spring/app-config.xml" })
+@ContextConfiguration(locations = {"classpath:/test-app-config.xml", "classpath:META-INF/spring/app-config.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public abstract class AbstractTestingBase {
 
-	@PersistenceContext
-	protected EntityManager entityManager;
-
-	@Autowired
-	private DataSource dataSource;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
 }
