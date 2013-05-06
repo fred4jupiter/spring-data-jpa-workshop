@@ -1,4 +1,4 @@
-package com.opitzconsulting.springdata.jpa;
+package com.opitzconsulting.springdata.jpa.util;
 
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.EmailAddress;

@@ -1,6 +1,7 @@
 package com.opitzconsulting.springdata.jpa;
 
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
+import com.opitzconsulting.springdata.jpa.util.CustomerFactory;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

@@ -4,6 +4,7 @@ package com.opitzconsulting.springdata.jpa;
 import com.opitzconsulting.springdata.jpa.auditing.AuditorAwareImpl;
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
+import com.opitzconsulting.springdata.jpa.util.CustomerFactory;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

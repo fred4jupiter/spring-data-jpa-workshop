@@ -3,21 +3,20 @@ package com.opitzconsulting.springdata.jpa;
 
 import com.opitzconsulting.springdata.jpa.domain.Address;
 import com.opitzconsulting.springdata.jpa.repository.AddressRepository;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class AddressRepositoryTest extends AbstractTestingBase {
 
     @Autowired
     private AddressRepository addressRepository;
-
     private Address address;
 
     @Before
@@ -53,5 +52,14 @@ public class AddressRepositoryTest extends AbstractTestingBase {
 
         Address address1 = addresses.get(0);
         assertThat(address1, equalTo(address));
+    }
+
+    @Test
+    public void callMethodFromCustomRepository() {
+        final String city = "Hamburg";
+        List<Address> addressList = addressRepository.lookForAddressesWithCityLike(city);
+        assertThat(addressList.size(), equalTo(1));
+
+        assertThat(addressList, hasItem(Matchers.<Address>hasProperty("city", equalTo(city))));
     }
 }

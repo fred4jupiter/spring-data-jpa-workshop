@@ -3,6 +3,7 @@ package com.opitzconsulting.springdata.jpa;
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.Customer_;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
+import com.opitzconsulting.springdata.jpa.util.CustomerFactory;
 import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.Test;
