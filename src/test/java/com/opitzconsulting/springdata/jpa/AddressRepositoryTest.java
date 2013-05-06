@@ -8,12 +8,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class AddressRepositoryTest extends AbstractTestingBase {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private AddressRepository addressRepository;
@@ -61,5 +66,23 @@ public class AddressRepositoryTest extends AbstractTestingBase {
         assertThat(addressList.size(), equalTo(1));
 
         assertThat(addressList, hasItem(Matchers.<Address>hasProperty("city", equalTo(city))));
+    }
+
+    @Test
+    public void updateAddress() {
+        assertNotNull(address);
+        assertNotNull(address.getId());
+        assertThat(address.getStreet(), equalTo("Milchstrasse"));
+
+        final String newStreet = "Marsweg";
+        int updatedRows = addressRepository.updateStreetOfAddress(newStreet, address.getId());
+        assertThat(updatedRows, equalTo(1));
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Address updatedAddress = addressRepository.findOne(address.getId());
+        assertNotNull(updatedAddress);
+        assertThat(updatedAddress.getStreet(), equalTo(newStreet));
     }
 }

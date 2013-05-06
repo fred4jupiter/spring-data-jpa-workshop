@@ -2,8 +2,10 @@ package com.opitzconsulting.springdata.jpa.repository;
 
 import com.opitzconsulting.springdata.jpa.domain.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,5 +37,17 @@ public interface AddressRepository extends JpaRepository<Address, Long>, Address
      * @return
      */
     List<Address> findAddressByCountry(String country);
+
+    /**
+     * Example for an updateable query.
+     *
+     * @param addressId
+     * @param street
+     * @return
+     */
+    @Modifying
+    @Transactional
+    @Query("update Address a set a.street = ?1 where a.id = ?2")
+    int updateStreetOfAddress(String street, Long addressId);
 
 }

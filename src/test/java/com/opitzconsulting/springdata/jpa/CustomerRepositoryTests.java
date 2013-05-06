@@ -130,6 +130,7 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         assertThat(secondPage.hasNextPage(), equalTo(false));
     }
 
+
     private void populateCustomersWithOneLike(Customer customer) {
         customerRepository.save(customer);
         customerRepository.save(new Customer(500.00, "Fred", "Feuerstein", "fred@feuerstein.de"));
