@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -38,18 +40,33 @@ public class Customer {
     @Column(name = "EMAIL", unique = true)
     private EmailAddress emailAddress;
 
-    @CreatedBy
-    @Column(name = "CREATED_BY")
-    private String createdByUsername;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Set<Address> addresses = new HashSet<>();
 
+    // auditable field
+    @CreatedBy
+    @ManyToOne
+    @JoinColumn(name = "CREATED_BY_USER")
+    private User createdBy;
+
+    // auditable field
     @CreatedDate
-    @Column(name = "CREATED")
+    @Column(name = "CREATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "CUSTOMER_ID")
-    private Set<Address> addresses = new HashSet<Address>();
+    // auditable field
+    @LastModifiedBy
+    @ManyToOne
+    @JoinColumn(name = "LAST_MODIFIED_BY_USER")
+    private User lastModifiedBy;
+
+    // auditable field
+    @LastModifiedDate
+    @Column(name = "LAST_MODIFIED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
     protected Customer() {
         // for hibernate
@@ -106,20 +123,12 @@ public class Customer {
         return lastname;
     }
 
-    public String getCreatedByUsername() {
-        return createdByUsername;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
     public EmailAddress getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(EmailAddress emailAddress) {
-        this.emailAddress = emailAddress;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
     @Override
@@ -130,11 +139,40 @@ public class Customer {
         builder.append("emailAddress", emailAddress);
         builder.append("birthday", birthday);
         builder.append("createdAt", createdAt);
-        builder.append("createdByUsername", createdByUsername);
+        builder.append("createdByUsername", createdBy);
         builder.append("createdDate", createdDate);
-
         return builder.toString();
     }
 
+    public User getCreatedBy() {
+        return createdBy;
+    }
 
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public User getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(User lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 }

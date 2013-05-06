@@ -22,10 +22,11 @@ public class AuditingTest extends AbstractTestingBase {
         Customer customer = new Customer(birthday, "Michael", "Staehler");
         assertNotNull(customer);
 
-        Customer savedCustomer = this.customerRepository.save(customer);
+        Customer savedCustomer = this.customerRepository.saveAndFlush(customer);
         assertThat(savedCustomer.getId(), notNullValue());
 
         assertThat(savedCustomer.getCreatedAt(), notNullValue());
-        assertThat(savedCustomer.getCreatedByUsername(), equalTo(AuditorAwareImpl.USERNAME_FOR_SYSTEM_USER));
+        assertThat(savedCustomer.getCreatedBy(), notNullValue());
+        assertThat(savedCustomer.getCreatedBy().getUsername(), equalTo(AuditorAwareImpl.USERNAME_FOR_SYSTEM_USER));
     }
 }
