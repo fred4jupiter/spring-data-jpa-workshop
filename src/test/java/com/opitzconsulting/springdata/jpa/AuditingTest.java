@@ -6,19 +6,12 @@ import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
 import org.joda.time.LocalDate;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-@ContextConfiguration(locations = {"classpath:/test-app-auditing-config.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
-public class AuditingTest {
+public class AuditingTest extends AbstractTestingBase {
 
     @Autowired
     private CustomerRepository customerRepository;

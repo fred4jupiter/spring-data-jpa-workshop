@@ -10,4 +10,9 @@
 
 	<jpa:repositories base-package="com.opitzconsulting.springdata.jpa.repository" />
 
+    <!-- auditing -->
+    <jpa:auditing auditor-aware-ref="auditorAware"/>
+
+    <bean id="auditorAware" class="com.opitzconsulting.springdata.jpa.auditing.AuditorAwareImpl"/>
+
 </beans>
