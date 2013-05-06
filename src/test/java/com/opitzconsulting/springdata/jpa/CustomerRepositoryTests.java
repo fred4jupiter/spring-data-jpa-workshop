@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.opitzconsulting.springdata.jpa.specs.CustomerSpecs.*;
@@ -97,17 +96,8 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         List<Customer> list = customerRepository.findByEmailAddressOrderByLastnameAsc(customer.getEmailAddress());
         assertThat("no customer found", list.isEmpty(), equalTo(false));
 
-        assertThat(list, Matchers.<Customer>hasItem(Matchers.<Customer>hasProperty("firstname", equalTo(customer.getFirstname()))));
-        assertThat(list, Matchers.<Customer>hasItem(Matchers.<Customer>hasProperty("emailAddress", equalTo(customer.getEmailAddress()))));
-    }
-
-    @Test
-    public void checkCollectionMatchers() {
-        Customer customer = new Customer(500.00, "Fred", "Feuerstein", "fred@feuerstein.de");
-        Customer customer2 = new Customer(546.34, "Wilma", "Feuerstein", "wilma@feuerstein.de");
-        List<Customer> list = Arrays.asList(customer, customer2);
-
-        assertThat(list, Matchers.<Customer>hasItem(Matchers.<Customer>hasProperty("firstname", equalTo("Fred"))));
+        assertThat(list, hasItem(Matchers.<Customer>hasProperty("firstname", equalTo(customer.getFirstname()))));
+        assertThat(list, hasItem(Matchers.<Customer>hasProperty("emailAddress", equalTo(customer.getEmailAddress()))));
     }
 
     private void populateCustomersWithOneLike(Customer customer) {
