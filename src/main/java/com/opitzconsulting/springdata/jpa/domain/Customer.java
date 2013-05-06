@@ -134,14 +134,15 @@ public class Customer {
 
     @Override
     public String toString() {
-        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE);
+        builder.append("firstname", firstname);
+        builder.append("lastname", lastname);
+        builder.append("emailAddress", emailAddress);
         builder.append("birthday", birthday);
         builder.append("createdAt", createdAt);
         builder.append("createdByUsername", createdByUsername);
         builder.append("createdDate", createdDate);
-        builder.append("emailAddress", emailAddress);
-        builder.append("firstname", firstname);
-        builder.append("lastname", lastname);
+
         return builder.toString();
     }
 }

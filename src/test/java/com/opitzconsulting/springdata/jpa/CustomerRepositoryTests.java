@@ -8,11 +8,15 @@ import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.opitzconsulting.springdata.jpa.specs.CustomerSpecs.*;
@@ -99,6 +103,31 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
 
         assertThat(list, hasItem(Matchers.<Customer>hasProperty("firstname", equalTo(customer.getFirstname()))));
         assertThat(list, hasItem(Matchers.<Customer>hasProperty("emailAddress", equalTo(customer.getEmailAddress()))));
+    }
+
+    @Test
+    public void findCustomersUsingPagableFeatures() {
+        final Customer customer = new Customer(6483.00, "Teddy", "Baer", "teddy@baer.com");
+        populateCustomersWithOneLike(customer);
+
+        final int size = 4;
+
+        final int firstPageNumber = 0;
+        Sort sort = new Sort(Sort.Direction.ASC, "firstname");
+        Page<Customer> firstPage = customerRepository.findAll(new PageRequest(firstPageNumber, size, sort));
+        assertNotNull(firstPage);
+        assertThat(firstPage.getNumber(), equalTo(firstPageNumber));
+        assertThat(firstPage.getSize(), equalTo(size));
+        assertThat(firstPage.getNumberOfElements(), equalTo(size));
+        assertThat(firstPage.hasNextPage(), equalTo(true));
+
+        final int secondPageNumber = 1;
+        Page<Customer> secondPage = customerRepository.findAll(new PageRequest(secondPageNumber, size, sort));
+        assertNotNull(secondPage);
+        assertThat(secondPage.getNumber(), equalTo(secondPageNumber));
+        assertThat(secondPage.getSize(), equalTo(size));
+        assertThat(secondPage.getNumberOfElements(), equalTo(2));
+        assertThat(secondPage.hasNextPage(), equalTo(false));
     }
 
     private void populateCustomersWithOneLike(Customer customer) {
