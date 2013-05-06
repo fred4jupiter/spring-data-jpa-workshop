@@ -1,16 +1,16 @@
 package com.opitzconsulting.springdata.jpa.domain;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.*;
-
-import org.joda.time.DateTime;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.util.Assert;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -86,6 +86,12 @@ public class Customer {
         this.createdAt = createdAt;
     }
 
+    public Customer(Double salesAmount, String firstname, String lastname, String email) {
+        this(salesAmount, new LocalDate(), firstname, lastname);
+        this.createdAt = new LocalDate();
+        this.emailAddress = new EmailAddress(email);
+    }
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -124,5 +130,18 @@ public class Customer {
 
     public void setEmailAddress(EmailAddress emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
+        builder.append("birthday", birthday);
+        builder.append("createdAt", createdAt);
+        builder.append("createdByUsername", createdByUsername);
+        builder.append("createdDate", createdDate);
+        builder.append("emailAddress", emailAddress);
+        builder.append("firstname", firstname);
+        builder.append("lastname", lastname);
+        return builder.toString();
     }
 }
