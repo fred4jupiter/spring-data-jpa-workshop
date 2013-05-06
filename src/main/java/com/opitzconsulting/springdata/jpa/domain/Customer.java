@@ -55,18 +55,8 @@ public class Customer {
         // for hibernate
     }
 
-
     public Customer(LocalDate birthday, String firstname, String lastname) {
-        Assert.hasText(firstname);
-        Assert.hasText(lastname);
-        Assert.notNull(birthday);
-
-        Assert.notNull(salesAmount);
-        this.salesAmount = new Double(0);
-        this.birthday = birthday;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.createdAt = new LocalDate();
+        this(new Double(0), birthday, firstname, lastname);
     }
 
     public Customer(Double salesAmount, LocalDate birthday, String firstname, String lastname) {
@@ -81,15 +71,15 @@ public class Customer {
         this.createdAt = new LocalDate();
     }
 
-    public Customer(Double salesAmount, LocalDate birthday, String firstname, String lastname, LocalDate createdAt) {
-        this(salesAmount, birthday, firstname, lastname);
-        this.createdAt = createdAt;
-    }
-
     public Customer(Double salesAmount, String firstname, String lastname, String email) {
         this(salesAmount, new LocalDate(), firstname, lastname);
         this.createdAt = new LocalDate();
         this.emailAddress = new EmailAddress(email);
+    }
+
+    public Customer(Double salesAmount, LocalDate birthday, String firstname, String lastname, LocalDate createdAt) {
+        this(salesAmount, birthday, firstname, lastname);
+        this.createdAt = createdAt;
     }
 
     public LocalDate getCreatedAt() {
@@ -145,4 +135,6 @@ public class Customer {
 
         return builder.toString();
     }
+
+
 }

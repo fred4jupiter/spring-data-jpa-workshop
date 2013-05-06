@@ -3,7 +3,6 @@ package com.opitzconsulting.springdata.jpa;
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.Customer_;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
-import com.opitzconsulting.springdata.jpa.util.CustomerFactory;
 import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.opitzconsulting.springdata.jpa.specs.CustomerSpecs.*;
@@ -28,13 +26,11 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
 
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private CustomerFactory customerFactory;
 
     @Test
     public void findCustomerByName() {
         LocalDate birthday = new LocalDate(1976, 2, 25);
-        Customer customer = customerFactory.createCustomer(birthday, "Michael", "Staehler");
+        Customer customer = new Customer(birthday, "Michael", "Staehler");
         assertNotNull(customer);
 
         Customer savedCustomer = this.customerRepository.save(customer);
@@ -69,24 +65,26 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         Customer customer = createLongTermCustomerWithBirthdayOn(today);
 
         Customer foundCustomer = customerRepository.findOne(where(hasBirthdayOn(today)).and(isLongTermCustomer()));
-        assertEquals(customer, foundCustomer);
+        assertThat(foundCustomer, equalTo(customer));
     }
 
     @Test
     public void findCustomerWithBirthdayOnTodayAndSalesAmountGreaterThan() {
         final LocalDate todayAsBirthday = new LocalDate();
         final Double salesAmount = Double.valueOf(5100);
-        final Customer customer = customerFactory.createCustomer(todayAsBirthday, salesAmount);
+
+        final Customer customer = new Customer(salesAmount, todayAsBirthday, "Fred", "Feuerstein");
         customerRepository.save(customer);
 
         Customer foundCustomer = customerRepository.findByBirthdayAndSalesAmountGreaterThan(customer.getBirthday(), salesAmount - 50);
-        assertEquals(customer, foundCustomer);
+        assertThat(foundCustomer, equalTo(customer));
+        assertThat(foundCustomer.getSalesAmount(), equalTo(salesAmount));
     }
 
     @Test
     public void findAllLongTermCustomersOrSalesOfMoreThan() {
-        final Double salesAmout = 50.0;
-        final Customer customer = customerFactory.createCustomer(salesAmout);
+        final Double salesAmount = 50.0;
+        final Customer customer = new Customer(salesAmount, new LocalDate(), "Fred", "Feuerstein");
         customerRepository.save(customer);
 
         Customer foundCustomer = customerRepository.findOne(where(isLongTermCustomer()).or(hasSalesOfMoreThan(45.4)));
@@ -130,7 +128,6 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         assertThat(secondPage.hasNextPage(), equalTo(false));
     }
 
-
     private void populateCustomersWithOneLike(Customer customer) {
         customerRepository.save(customer);
         customerRepository.save(new Customer(500.00, "Fred", "Feuerstein", "fred@feuerstein.de"));
@@ -141,9 +138,9 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
     }
 
     private Customer createLongTermCustomerWithBirthdayOn(LocalDate birthday) {
-        final Double salesAmout = 100.0;
+        final Double salesAmount = 100.0;
         final LocalDate createdAt = new LocalDate().minusYears(2).minusDays(3);
-        Customer customer = customerFactory.createCustomer(birthday, salesAmout, createdAt);
+        Customer customer = new Customer(salesAmount, birthday, "Fred", "Feuerstein", createdAt);
         customerRepository.save(customer);
         return customer;
     }

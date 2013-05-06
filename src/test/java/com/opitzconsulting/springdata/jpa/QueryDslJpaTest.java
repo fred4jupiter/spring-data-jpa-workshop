@@ -5,19 +5,16 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.QCustomer;
 import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
-import com.opitzconsulting.springdata.jpa.util.CustomerFactory;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class QueryDslJpaTest extends AbstractTestingBase {
 
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private CustomerFactory customerFactory;
 
     @Test
     public void findCustomerWithBirthdayOn_UsingPlaingQueryDSLWithJPA() {
@@ -42,7 +39,7 @@ public class QueryDslJpaTest extends AbstractTestingBase {
 
     private Customer createAndSaveCustomer() {
         LocalDate birthday = new LocalDate(1976, 2, 25);
-        Customer customer = customerFactory.createCustomer(birthday, "Fred", "Feuerstein");
+        Customer customer = new Customer(birthday, "Fred", "Feuerstein");
         customerRepository.save(customer);
         return customer;
     }
