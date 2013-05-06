@@ -25,11 +25,4 @@ public class ApplicationConfigTest {
         assertThat(context, is(notNullValue()));
         assertThat(context.getBean(CustomerRepository.class), is(notNullValue()));
     }
-
-    @Test
-    public void bootstrapAppFromXml_Testing() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("test-app-config.xml");
-        assertThat(context, is(notNullValue()));
-        assertThat(context.getBean(CustomerRepository.class), is(notNullValue()));
-    }
 }

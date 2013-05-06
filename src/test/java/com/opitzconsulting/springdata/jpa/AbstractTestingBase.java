@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author michael
  */
-@ContextConfiguration(locations = {"classpath:/test-app-config.xml"})
-//@ContextConfiguration(classes = TestingConfig.class)
+@ContextConfiguration(locations = {"classpath:/META-INF/spring/app-config.xml"})
+//@ContextConfiguration(classes = ApplicationConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public abstract class AbstractTestingBase {
