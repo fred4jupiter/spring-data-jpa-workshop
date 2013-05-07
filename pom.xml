@@ -22,6 +22,7 @@
 
     <build>
         <pluginManagement>
+            <!-- This plugin is only for eclipse to avoid issues with the m2-eclipse-plugin -->
             <plugins>
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -67,13 +68,6 @@
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>maven-apt-plugin</artifactId>
                 <version>1.0.4</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.mysema.querydsl</groupId>
-                        <artifactId>querydsl-apt</artifactId>
-                        <version>${querydsl.version}</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -86,6 +80,13 @@
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>${querydsl.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <!-- generates JPA meta-annotation classes -->
