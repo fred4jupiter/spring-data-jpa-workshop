@@ -141,6 +141,8 @@ public class Customer {
         builder.append("createdAt", createdAt);
         builder.append("createdByUsername", createdBy);
         builder.append("createdDate", createdDate);
+        builder.append("lastModifiedBy", lastModifiedBy);
+        builder.append("lastModifiedDate", lastModifiedDate);
         return builder.toString();
     }
 

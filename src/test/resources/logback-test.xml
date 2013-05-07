@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>[%d{ISO8601}] %-5p %c %m %n</pattern>
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="warn"/>
+    <logger name="org.springframework" level="WARN"/>
 
-    <logger name="org.hibernate" level="warn"/>
+    <logger name="org.hibernate" level="WARN"/>
 
-    <logger name="org.jboss" level="info"/>
+    <logger name="org.jboss" level="INFO"/>
 
-    <logger name="org.springframework.data" level="debug"/>
+    <logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="FATAL"/>
 
-    <root level="debug">
+    <logger name="org.springframework.data" level="INFO"/>
+
+    <!-- application logging-->
+    <logger name="com.opitzconsulting.springdata.jpa" level="DEBUG"/>
+
+    <root level="WARN">
         <appender-ref ref="console"/>
     </root>
 

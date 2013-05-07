@@ -141,7 +141,6 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         final Double salesAmount = 100.0;
         final LocalDate createdAt = new LocalDate().minusYears(2).minusDays(3);
         Customer customer = new Customer(salesAmount, birthday, "Fred", "Feuerstein", createdAt);
-        customerRepository.save(customer);
-        return customer;
+        return customerRepository.save(customer);
     }
 }
