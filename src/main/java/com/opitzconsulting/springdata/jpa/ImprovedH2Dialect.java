@@ -3,7 +3,7 @@ package com.opitzconsulting.springdata.jpa;
 import org.hibernate.dialect.H2Dialect;
 
 /**
- * This is only a workaround to avoid error log message when using H2 DB in in-memory mode.
+ * This is just a workaround to avoid error log message when using H2 DB in in-memory mode.
  *
  * @see <a href="https://hibernate.atlassian.net/browse/HHH-7002">SchemaExport ERROR when using in-memory database</a>
  */

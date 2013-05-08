@@ -12,6 +12,8 @@
 
     <logger name="org.jboss" level="INFO"/>
 
+    <logger name="java.sql" level="DEBUG"/>
+
     <logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="FATAL"/>
 
     <logger name="org.springframework.data" level="INFO"/>
@@ -19,7 +21,7 @@
     <!-- application logging-->
     <logger name="com.opitzconsulting.springdata.jpa" level="DEBUG"/>
 
-    <root level="WARN">
+    <root level="DEBUG">
         <appender-ref ref="console"/>
     </root>
 
