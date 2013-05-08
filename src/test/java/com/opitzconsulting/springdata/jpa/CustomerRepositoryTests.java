@@ -6,6 +6,8 @@ import com.opitzconsulting.springdata.jpa.repository.CustomerRepository;
 import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,8 +26,23 @@ import static org.springframework.data.jpa.domain.Specifications.where;
 
 public class CustomerRepositoryTests extends AbstractTestingBase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerRepositoryTests.class);
+
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Test
+    public void findAllCustomers() {
+        populateCustomers();
+
+        List<Customer> customers = this.customerRepository.findAll();
+        assertThat(customers.isEmpty(), equalTo(false));
+
+        for (Customer customer : customers) {
+            assertThat(customer, notNullValue());
+            LOGGER.debug("customer={}", customer);
+        }
+    }
 
     @Test
     public void findCustomerByName() {
@@ -128,8 +145,15 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         assertThat(secondPage.hasNextPage(), equalTo(false));
     }
 
+    private void populateCustomers() {
+        populateCustomersWithOneLike(null);
+    }
+
     private void populateCustomersWithOneLike(Customer customer) {
-        customerRepository.save(customer);
+        if (customer != null) {
+            customerRepository.save(customer);
+        }
+
         customerRepository.save(new Customer(500.00, "Fred", "Feuerstein", "fred@feuerstein.de"));
         customerRepository.save(new Customer(546.34, "Wilma", "Feuerstein", "wilma@feuerstein.de"));
         customerRepository.save(new Customer(12345.00, "Karl", "Katze", "karl@katze.de"));

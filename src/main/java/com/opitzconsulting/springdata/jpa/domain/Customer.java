@@ -133,7 +133,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE);
+        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         builder.append("firstname", firstname);
         builder.append("lastname", lastname);
         builder.append("emailAddress", emailAddress);

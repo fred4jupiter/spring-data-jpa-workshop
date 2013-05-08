@@ -1,5 +1,8 @@
 package com.opitzconsulting.springdata.jpa.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 
 
@@ -28,5 +31,13 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append("id", id);
+        builder.append("username", username);
+        return builder.toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.opitzconsulting.springdata.jpa.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.util.Assert;
 
@@ -43,6 +45,15 @@ public class Address extends AbstractAuditable<User, Long> {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        builder.append("street", street);
+        builder.append("city", city);
+        builder.append("country", country);
+        return builder.toString();
     }
 
 }

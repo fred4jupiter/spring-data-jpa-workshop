@@ -15,6 +15,7 @@
  */
 package com.opitzconsulting.springdata.jpa;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -27,6 +28,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Infrastructure Java Configuration.
@@ -46,11 +48,16 @@ public class InfrastructureConfig {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
         vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setShowSql(false);
+
+        Properties jpaProperties = new Properties();
+        jpaProperties.put(Environment.DIALECT, ImprovedH2Dialect.class.getName());
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan(getClass().getPackage().getName());
         factory.setDataSource(dataSource());
+        factory.setJpaProperties(jpaProperties);
 
         return factory;
     }
