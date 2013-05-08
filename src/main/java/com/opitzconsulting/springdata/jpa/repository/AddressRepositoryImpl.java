@@ -8,9 +8,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-
+/**
+ * Implementation of the custom address repository with package visibility used.
+ */
 @Repository
-public class AddressRepositoryImpl implements AddressRepositoryCustom {
+class AddressRepositoryImpl implements AddressRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
