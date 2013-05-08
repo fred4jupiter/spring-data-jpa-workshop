@@ -59,8 +59,8 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
 
     @Test
     public void findCustomersWithBirthdayTodayAndIsLongTermCustomer_JPA() {
-        LocalDate today = new LocalDate();
-        Customer customer = createLongTermCustomerWithBirthdayOn(today);
+        final LocalDate today = new LocalDate();
+        final Customer customer = createLongTermCustomerWithBirthdayOn(today);
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
