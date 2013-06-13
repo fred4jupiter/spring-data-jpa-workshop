@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public class AddressRepositoryImpl implements AddressRepositoryCustom {
+class AddressRepositoryImpl implements AddressRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;

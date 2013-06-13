@@ -11,7 +11,7 @@ import java.util.List;
  * <p>NOTE: The interface has to be named with the postfix <code>Custom</code> to work out of the box.</p>
  */
 @NoRepositoryBean
-public interface AddressRepositoryCustom {
+interface AddressRepositoryCustom {
 
     List<Address> lookForAddressesWithCityLike(String city);
 }
