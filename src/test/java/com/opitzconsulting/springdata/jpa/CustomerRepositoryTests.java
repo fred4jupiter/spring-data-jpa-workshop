@@ -163,7 +163,7 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
 
     private Customer createLongTermCustomerWithBirthdayOn(LocalDate birthday) {
         final Double salesAmount = 100.0;
-        final LocalDate createdAt = new LocalDate().minusYears(2).minusDays(3);
+        final LocalDate createdAt = new LocalDate().minusYears(3);
         Customer customer = new Customer(salesAmount, birthday, "Fred", "Feuerstein", createdAt);
         return customerRepository.save(customer);
     }
