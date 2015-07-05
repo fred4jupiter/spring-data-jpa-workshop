@@ -8,6 +8,8 @@ import javax.persistence.criteria.Root;
 import org.joda.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 
+
+
 import com.opitzconsulting.springdata.jpa.domain.Customer;
 import com.opitzconsulting.springdata.jpa.domain.Customer_;
 
