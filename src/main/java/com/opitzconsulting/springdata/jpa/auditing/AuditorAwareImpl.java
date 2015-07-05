@@ -8,7 +8,7 @@ import org.springframework.data.domain.AuditorAware;
 /**
  * Application specific implementation to return the current user.
  *
- * <p>NOTE: This is only a dummy implementation. Usually you would use a security framework to return thos.</p>
+ * <p>NOTE: This is only a dummy implementation. Usually you would use a security framework to return this.</p>
  */
 public class AuditorAwareImpl implements AuditorAware<User> {
 

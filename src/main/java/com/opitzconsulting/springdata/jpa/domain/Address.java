@@ -1,59 +1,64 @@
 package com.opitzconsulting.springdata.jpa.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.util.Assert;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "ADDRESS")
 @NamedQuery(name = "address.findAddressByCountry", query = "Select a from Address a where a.country = ?1")
 public class Address extends AbstractAuditable<User, Long> {
 
-    @Column(name = "STREET")
-    private String street;
+	private static final long serialVersionUID = 1169809354105689566L;
 
-    @Column(name = "CITY")
-    private String city;
+	@Column(name = "STREET")
+	private String street;
 
-    @Column(name = "COUNTRY")
-    private String country;
+	@Column(name = "CITY")
+	private String city;
 
-    public Address(String street, String city, String country) {
-        Assert.hasText(street, "Street must not be null or empty!");
-        Assert.hasText(city, "City must not be null or empty!");
-        Assert.hasText(country, "Country must not be null or empty!");
+	@Column(name = "COUNTRY")
+	private String country;
 
-        this.street = street;
-        this.city = city;
-        this.country = country;
-    }
+	public Address(String street, String city, String country) {
+		Assert.hasText(street, "Street must not be null or empty!");
+		Assert.hasText(city, "City must not be null or empty!");
+		Assert.hasText(country, "Country must not be null or empty!");
 
-    protected Address() {
-        // for hibernate
-    }
+		this.street = street;
+		this.city = city;
+		this.country = country;
+	}
 
-    public String getStreet() {
-        return street;
-    }
+	protected Address() {
+		// for hibernate
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public String getStreet() {
+		return street;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    @Override
-    public String toString() {
-        final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        builder.append("street", street);
-        builder.append("city", city);
-        builder.append("country", country);
-        return builder.toString();
-    }
+	public String getCountry() {
+		return country;
+	}
+
+	@Override
+	public String toString() {
+		final ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		builder.append("street", street);
+		builder.append("city", city);
+		builder.append("country", country);
+		return builder.toString();
+	}
 
 }
