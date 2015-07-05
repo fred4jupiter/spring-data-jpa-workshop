@@ -134,7 +134,7 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         assertThat(firstPage.getNumber(), equalTo(firstPageNumber));
         assertThat(firstPage.getSize(), equalTo(size));
         assertThat(firstPage.getNumberOfElements(), equalTo(size));
-        assertThat(firstPage.hasNextPage(), equalTo(true));
+        assertThat(firstPage.hasNext(), equalTo(true));
 
         final int secondPageNumber = 1;
         Page<Customer> secondPage = customerRepository.findAll(new PageRequest(secondPageNumber, size, sort));
@@ -142,7 +142,7 @@ public class CustomerRepositoryTests extends AbstractTestingBase {
         assertThat(secondPage.getNumber(), equalTo(secondPageNumber));
         assertThat(secondPage.getSize(), equalTo(size));
         assertThat(secondPage.getNumberOfElements(), equalTo(2));
-        assertThat(secondPage.hasNextPage(), equalTo(false));
+        assertThat(secondPage.hasNext(), equalTo(false));
     }
 
     private void populateCustomers() {
